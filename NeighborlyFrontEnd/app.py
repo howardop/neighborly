@@ -2,7 +2,15 @@ import logging.config
 import os
 from flask import Flask, Blueprint, request, jsonify, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
-import settings
+
+# importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('/home/site/wwwroot')
+#sys.path.append('.')
+
+#import settings
+
 import requests
 import json
 from feedgen.feed import FeedGenerator
@@ -25,7 +33,7 @@ def feeds():
     feed = AtomFeed(title='All Advertisements feed',
                     feed_url=request.url, url=request.url_root)
 
-    response = requests.get(settings.API_URL + '/getAdvertisements')
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api/getAdvertisements")
     posts = response.json()
 
     for key, value in posts.items():
@@ -49,7 +57,7 @@ def rss():
     fg.link(href='https://neighborly-client-v1.azurewebsites.net/')
     
 
-    response = requests.get(settings.API_URL + '/getAdvertisements')
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getAdvertisements')
     ads = response.json()
 
     for a in ads: 
@@ -63,8 +71,8 @@ def rss():
 
 @app.route('/')
 def home():
-    response = requests.get(settings.API_URL + '/getAdvertisements')
-    response2 = requests.get(settings.API_URL + '/getPosts')
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getAdvertisements')
+    response2 = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getPosts')
 
     ads = response.json()
     posts = response2.json()
@@ -78,20 +86,20 @@ def add_ad_view():
 
 @app.route('/ad/edit/<id>', methods=['GET'])
 def edit_ad_view(id):
-    response = requests.get(settings.API_URL + '/getAdvertisement?id=' + id)
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getAdvertisement?id=' + id)
     ad = response.json()
     return render_template("edit_ad.html", ad=ad)
 
 
 @app.route('/ad/delete/<id>', methods=['GET'])
 def delete_ad_view(id):
-    response = requests.get(settings.API_URL + '/getAdvertisement?id=' + id)
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getAdvertisement?id=' + id)
     ad = response.json()
     return render_template("delete_ad.html", ad=ad)
 
 @app.route('/ad/view/<id>', methods=['GET'])
 def view_ad_view(id):
-    response = requests.get(settings.API_URL + '/getAdvertisement?id=' + id)
+    response = requests.get("https://hlofcnapp2.azurewebsites.net/api" + '/getAdvertisement?id=' + id)
     ad = response.json()
     return render_template("view_ad.html", ad=ad)
 
@@ -106,7 +114,7 @@ def add_ad_request():
         'imgUrl': request.form['imgUrl'],
         'price': request.form['price']
     }
-    response = requests.post(settings.API_URL + '/createAdvertisement', json=json.dumps(req_data))
+    response = requests.post("https://hlofcnapp2.azurewebsites.net/api" + '/createAdvertisement', json=json.dumps(req_data))
     return redirect(url_for('home'))
 
 @app.route('/ad/update/<id>', methods=['POST'])
@@ -120,19 +128,19 @@ def update_ad_request(id):
         'imgUrl': request.form['imgUrl'],
         'price': request.form['price']
     }
-    response = requests.put(settings.API_URL + '/updateAdvertisement?id=' + id, json=json.dumps(req_data))
+    response = requests.put("https://hlofcnapp2.azurewebsites.net/api" + '/updateAdvertisement?id=' + id, json=json.dumps(req_data))
     return redirect(url_for('home'))
 
 @app.route('/ad/delete/<id>', methods=['POST'])
 def delete_ad_request(id):
-    response = requests.delete(settings.API_URL + '/deleteAdvertisement?id=' + id)
+    response = requests.delete("https://hlofcnapp2.azurewebsites.net/api" + '/deleteAdvertisement?id=' + id)
     if response.status_code == 200:
         return redirect(url_for('home'))
 
 # running app
 def main():
     print(' ----->>>> Flask Python Application running in development server')
-    app.run(host=settings.SERVER_HOST, port=settings.SERVER_PORT, debug=settings.FLASK_DEBUG)
+    app.run(host='localhost', port=5000, debug=True)
 
 
 if __name__ == '__main__':

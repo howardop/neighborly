@@ -2,6 +2,11 @@ import azure.functions as func
 import pymongo
 from bson.objectid import ObjectId
 
+# importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('.')
+import setvars
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
@@ -9,10 +14,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if id:
         try:
-            url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+            url = setvars.MONGOCONNECTSTR
             client = pymongo.MongoClient(url)
-            database = client['azure']
-            collection = database['advertisements']
+            database = client.hlomongodb2
+            collection = database.Ads
             
             query = {'_id': ObjectId(id)}
             result = collection.delete_one(query)

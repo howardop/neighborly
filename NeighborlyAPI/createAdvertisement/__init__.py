@@ -1,16 +1,22 @@
 import azure.functions as func
 import pymongo
 
+#importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('.')
+import setvars
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     request = req.get_json()
 
     if request:
         try:
-            url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+            url = setvars.MONGOCONNECTSTR
             client = pymongo.MongoClient(url)
-            database = client['azure']
-            collection = database['advertisements']
+            database = client.hlomongodb2
+            collection = database.Ads
 
             rec_id1 = collection.insert_one(eval(request))
 

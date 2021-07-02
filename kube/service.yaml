@@ -1,0 +1,16 @@
+. ~/proj2/setenvvars.sh
+
+#service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: neighborlyapp
+spec:
+  type: ClusterIP
+  selector:
+    app: neighborlyapp
+  ports:
+    - port: 5000 # SERVICE exposed port
+      name: http # SERVICE port name
+      protocol: TCP # The protocol the SERVICE will listen to
+      targetPort: http # Port to forward to in the POD

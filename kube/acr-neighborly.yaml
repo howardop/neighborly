@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neighborly-deployment
+  labels:
+    app: neighborly-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: neighborly
+  template:
+    metadata:
+      labels:
+        app: neighborly
+    spec:
+      containers:
+      - name: neighborly
+        image: hlodreg.azurecr.io/neighborlyapp:latest
+        ports:
+        - containerPort: 5000

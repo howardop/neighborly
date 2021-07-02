@@ -3,13 +3,19 @@ import pymongo
 import json
 from bson.json_util import dumps
 
+# importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('.')
+import setvars
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
-        url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+        url = setvars.MONGOCONNECTSTR
         client = pymongo.MongoClient(url)
-        database = client['azure']
-        collection = database['advertisements']
+        database = client.hlomongodb2
+        collection = database.Ads
 
 
         result = collection.find({})

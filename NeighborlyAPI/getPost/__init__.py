@@ -4,16 +4,23 @@ import json
 from bson.json_util import dumps
 from bson.objectid import ObjectId
 
+# importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('.')
+import setvars
+
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     id = req.params.get('id')
 
     if id:
         try:
-            url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+            url = setvars.MONGOCONNECTSTR
             client = pymongo.MongoClient(url)
-            database = client['azure']
-            collection = database['posts']
+            database = client.hlomongodb2
+            collection = database['Posts']
 
             query = {'_id': ObjectId(id)}
             result = collection.find_one(query)

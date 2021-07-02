@@ -5,6 +5,13 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 import logging
 
+# importing sys to add . to path to make python find setvars.py
+import sys
+# sys.path is a list of absolute path strings
+sys.path.append('.')
+import setvars
+
+
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     # example call http://localhost:7071/api/getAdvertisement/?id=5eb6cb8884f10e06dc6a2084
@@ -14,10 +21,10 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     
     if id:
         try:
-            url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+            url = setvars.MONGOCONNECTSTR
             client = pymongo.MongoClient(url)
-            database = client['azure']
-            collection = database['advertisements']
+            database = client.hlomongodb2
+            collection = database.Ads
            
             query = {'_id': ObjectId(id)}
             result = collection.find_one(query)

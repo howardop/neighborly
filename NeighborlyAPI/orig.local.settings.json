@@ -1,0 +1,10 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=cloudshell1263105347;AccountKey=KOSnIL8u8u9ZGuCYTRgTjn7rMol+olTwQlusy9yTei2fUXgVjiJUktPRCqylFGuQpTDv6Ixo4H11pC/buI750A==",
+    "FUNCTIONS_EXTENSION_VERSION": "~3",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "d09361b0-8798-4888-9f2e-628bfa3d6567"
+  },
+  "ConnectionStrings": {}
+}
