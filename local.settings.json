@@ -3,7 +3,7 @@
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
 
-    "ConnectionStrings": "mongodb://hlocosmosacct:vPhg8MKR3eNsSSNS82bHjNTCEdmDTLDqyP9XDWxOk0LB0Bd0uFDajWwcRz9dxpqALL7qFjgNeFuDyzOtW72ACw==@hlocosmosacct.documents.azure.com:10255/?ssl=true&replicaSet=globaldb",
+    "ConnectionStrings": "mongodb://hlocosmosacct:ifX4nXWx8PFqW9MuLqQtBkzEQ5sjmq1GgBZC6iVCBCLCWDFBTTxWztQdmqMCWU6Dxm9t2gSqiJyCEEyzvlrOHg==@hlocosmosacct.documents.azure.com:10255/?ssl=true&replicaSet=globaldb",
 
     "AzureWebJobsStorage": "hlostgact"
   }

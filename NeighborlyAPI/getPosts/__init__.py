@@ -16,7 +16,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python getPosts trigger function processed a request.')
 
     try:
-        #url = "mongodb://hlocosmosacct:fUvump9bd35iRjXkvc5Xgc8ED47XIljZdAVD3QX5MHTTXmLVSXTYRyGAYFR752v1mqROxT4GPmfQQqCMbfuRBg==@hlocosmosacct.documents.azure.com:10255/?ssl=true&replicaSet=globaldb"  # TODO: Update with appropriate MongoDB connection information
+        # TODO: __Done__ Update with appropriate MongoDB connection information
         url = setvars.MONGOCONNECTSTR
         client = pymongo.MongoClient(url)
         database = client.hlomongodb2

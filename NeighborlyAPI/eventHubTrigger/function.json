@@ -1,0 +1,13 @@
+{
+  "scriptFile": "__init__.py",
+  "bindings": [
+    {
+      "type": "eventGridTrigger",
+      "name": "event",
+      "direction": "in",
+	  "eventHubName": "hloeventhub", 
+	  "connection": "Endpoint=sb://hlonamespace.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=LmCKlOZbfMnKxZEf3kE9qFETAnm6pdkgCww7llCKCeQ="
+    }
+  ]
+}
+
